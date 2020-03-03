@@ -1,3 +1,4 @@
+import { SignupComponent } from './signup/signup.component';
 import { AdminLayoutComponent } from './shared/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { LoginComponent } from './login/login.component';
@@ -10,7 +11,7 @@ const routes: Routes = [
     path: '', component: AuthLayoutComponent, children: [
       {path: '', redirectTo: '/login', pathMatch: 'full'},
       {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterPageComponent}
+      {path: 'signup', component: SignupComponent}
     ]
   },
   {

@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from './shared/layouts/admin-layout/admin-layout.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AuthLayoutComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

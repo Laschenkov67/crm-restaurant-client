@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  template: '<router-outlet></router-outlet>'
+  selector: "app-root",
+  template: "<router-outlet></router-outlet>"
 })
+export class AppComponent implements OnInit {
+  
+  constructor(private auth: AuthService) {}
 
-export class AppComponent {
-  title = 'crm-restaurant-client';
+  ngOnInit() {
+    const potentialToken = localStorage.getItem("auth-token");
+    if (potentialToken !== null) {
+      this.auth.setToken(potentialToken);
+    }
+  }
 }

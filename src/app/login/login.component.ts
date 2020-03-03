@@ -1,3 +1,4 @@
+import { MaterialService } from './../services/material.service';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -27,9 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
-        // Теперь вы можете зайти в систему используя свои данные
+        MaterialService.toast('Теперь вы можете зайти в систему используя свои данные')
       } else if (params['accessDenied']) {
-        // Для начала авторизуйтесь в системе
+        MaterialService.toast('Для начала авторизуйтесь в системе')
       }
     })
   }
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.aSub = this.auth.login(this.formLogin.value).subscribe(
       () => this.router.navigate(['/overview']),
       error => {
-        console.warn(error);
+        MaterialService.toast(error.error.message)
         this.formLogin.enable(); //Делаем форму снова активной если произошла ошибка
       }
     );

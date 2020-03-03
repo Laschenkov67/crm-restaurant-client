@@ -1,3 +1,4 @@
+import { MaterialService } from './../services/material.service';
 import { AuthService } from './../services/auth.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -42,7 +43,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         })
       },
       error => {
-        console.warn(error)
+        MaterialService.toast(error.error.message)
         this.formSignup.enable()
       }
     )

@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { SignupComponent } from './signup/signup.component';
 import { AdminLayoutComponent } from './shared/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
@@ -16,7 +17,7 @@ const routes: Routes = [
   },
   {
     //Определяем лайоут админ-панели
-    path: '', component: AdminLayoutComponent, children: [
+    path: '', component: AdminLayoutComponent, canActivate: [AuthGuard], children: [
 
     ]
   }

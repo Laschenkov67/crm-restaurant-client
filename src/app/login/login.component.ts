@@ -45,15 +45,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onLogin() {
-    //Отключаем форму на время запроса
-    this.formLogin.disable();
 
-    this.aSub = this.auth.login(this.formLogin.value).subscribe(
-      () => this.router.navigate(['/overview']),
-      error => {
+    this.router.navigate(['/overview'])
+    //Отключаем форму на время запроса
+    //this.formLogin.disable();
+
+    //this.aSub = this.auth.login(this.formLogin.value).subscribe(
+      /* () => */ /* this.router.navigate(['/overview']), */
+ /*      error => {
         MaterialService.toast(error.error.message)
         this.formLogin.enable(); //Делаем форму снова активной если произошла ошибка
       }
-    );
+    ); */
   }
 }

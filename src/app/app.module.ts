@@ -10,6 +10,12 @@ import { LoginComponent } from './login/login.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { AdminLayoutComponent } from './shared/layouts/admin-layout/admin-layout.component';
 import { SignupComponent } from './signup/signup.component';
+import { OverviewComponent } from './overview/overview.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { OrdersComponent } from './orders/orders.component';
+import { HistoryComponent } from './history/history.component';
+import { CategoriesComponent } from './categories/categories.component';
+
 
 
 @NgModule({
@@ -18,7 +24,12 @@ import { SignupComponent } from './signup/signup.component';
     LoginComponent,
     AuthLayoutComponent,
     AdminLayoutComponent,
-    SignupComponent
+    SignupComponent,
+    OverviewComponent,
+    AnalyticsComponent,
+    OrdersComponent,
+    HistoryComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,8 @@
+import { OrdersComponent } from './orders/orders.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { HistoryComponent } from './history/history.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { OverviewComponent } from './overview/overview.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SignupComponent } from './signup/signup.component';
 import { AdminLayoutComponent } from './shared/layouts/admin-layout/admin-layout.component';
@@ -9,19 +14,27 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     //Определяем лайоут авторизации
-    path: '', component: AuthLayoutComponent, children: [
-      {path: '', redirectTo: '/login', pathMatch: 'full'},
-      {path: 'login', component: LoginComponent},
-      {path: 'signup', component: SignupComponent}
+    path: "",
+    component: AuthLayoutComponent,
+    children: [
+      { path: "", redirectTo: "/login", pathMatch: "full" },
+      { path: "login", component: LoginComponent },
+      { path: "signup", component: SignupComponent }
     ]
   },
   {
     //Определяем лайоут админ-панели
-    path: '', component: AdminLayoutComponent, canActivate: [AuthGuard], children: [
-
+    path: "",
+    component: AdminLayoutComponent, //canActivate: [AuthGuard],
+    children: [
+      { path: "overview", component: OverviewComponent },
+      { path: "analytics", component: AnalyticsComponent },
+      { path: "history", component: HistoryComponent },
+      { path: "order", component: OrdersComponent },
+      { path: "categories", component: CategoriesComponent }
     ]
   }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

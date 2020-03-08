@@ -1,3 +1,4 @@
+import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { HistoryComponent } from './history/history.component';
@@ -31,7 +32,9 @@ const routes: Routes = [
       { path: "analytics", component: AnalyticsComponent },
       { path: "history", component: HistoryComponent },
       { path: "order", component: OrdersComponent },
-      { path: "categories", component: CategoriesComponent }
+      { path: "categories", component: CategoriesComponent },
+      { path: "categories/new", component: CategoriesFormComponent },
+      { path: "categories/:id", component: CategoriesFormComponent }
     ]
   }
 ];

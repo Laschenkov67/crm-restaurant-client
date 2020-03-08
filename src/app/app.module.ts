@@ -15,6 +15,9 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { OrdersComponent } from './orders/orders.component';
 import { HistoryComponent } from './history/history.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { PositionFormComponent } from './categories/position-form/position-form.component';
 
 
 
@@ -29,7 +32,10 @@ import { CategoriesComponent } from './categories/categories.component';
     AnalyticsComponent,
     OrdersComponent,
     HistoryComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    LoaderComponent,
+    CategoriesFormComponent,
+    PositionFormComponent
   ],
   imports: [
     BrowserModule,

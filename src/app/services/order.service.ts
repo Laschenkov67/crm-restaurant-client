@@ -1,45 +1,58 @@
-import { Position } from './../interfaces/positions/positions.interface';
+import { HttpClient } from "@angular/common/http";
+import { Order } from "./../interfaces/order/order.interface";
+import { Observable } from "rxjs";
+import { Position } from "./../interfaces/positions/positions.interface";
 import { Injectable } from "@angular/core";
-import { OrderPosition } from '../interfaces/order/order-position.interface';
+import { OrderPosition } from "../interfaces/order/order-position.interface";
 
 @Injectable()
-
 export class OrderService {
+  constructor(private http: HttpClient) {}
 
-    public list: OrderPosition[] = []
-    public price = 0
-  
-    add(position: Position) {
-      const orderPosition: OrderPosition = Object.assign({}, {
+  public list: OrderPosition[] = [];
+  public price = 0;
+
+  add(position: Position) {
+    const orderPosition: OrderPosition = Object.assign(
+      {},
+      {
         name: position.name,
         cost: position.cost,
         quantity: position.quantity,
         _id: position._id
-      })
-  
-      const candidate = this.list.find(p => p._id === orderPosition._id)
-  
-      if (candidate) {
-        // Изменяем кол-во
-        candidate.quantity += orderPosition.quantity
-      } else {
-        this.list.push(orderPosition)
       }
-  
-      this.computePrice()
+    );
+
+    const candidate = this.list.find(p => p._id === orderPosition._id);
+
+    if (candidate) {
+      // Изменяем кол-во
+      candidate.quantity += orderPosition.quantity;
+    } else {
+      this.list.push(orderPosition);
     }
-  
-    remove(orderPosition: OrderPosition) {
-      const idx = this.list.findIndex(p => p._id === orderPosition._id)
-      this.list.splice(idx, 1)
-      this.computePrice()
-    }
-  
-    clear() {}
-  
-    private computePrice() {
-      this.price = this.list.reduce((total, item) => {
-        return total += item.quantity * item.cost
-      }, 0)
-    }
+
+    this.computePrice();
+  }
+
+  remove(orderPosition: OrderPosition) {
+    const idx = this.list.findIndex(p => p._id === orderPosition._id);
+    this.list.splice(idx, 1);
+    this.computePrice();
+  }
+
+  clear() {
+    this.list = [];
+    this.price = 0;
+  }
+
+  private computePrice() {
+    this.price = this.list.reduce((total, item) => {
+      return (total += item.quantity * item.cost);
+    }, 0);
+  }
+
+  create(order: Order): Observable<Order> {
+    return this.http.post<Order>("/api/order", order);
+  }
 }

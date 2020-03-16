@@ -1,3 +1,4 @@
+import { MaterialService } from './../../services/material.service';
 import { Position } from './../../interfaces/positions/positions.interface';
 import { switchMap, map } from 'rxjs/operators';
 import { PositionsService } from './../../services/positions.service';
@@ -36,7 +37,7 @@ export class OrderPositionsComponent implements OnInit {
   }
 
   addToOrder(position: Position) {
-    console.log(position);
-    this.order.add(position);
+    MaterialService.toast(`Добавлено x${position.quantity}`)
+    this.order.add(position)
   }
 }

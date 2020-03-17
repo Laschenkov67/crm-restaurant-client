@@ -1,7 +1,8 @@
 import { AnalyticsPage } from './../interfaces/analytics/analytics.interface';
 import { AnalyticsService } from './../services/analytics.service';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import {Chart} from 'chart.js'
 
 @Component({
   selector: "app-analytics",
@@ -20,16 +21,76 @@ export class AnalyticsComponent implements AfterViewInit, OnDestroy {
   constructor(private service: AnalyticsService) {}
 
   ngAfterViewInit() {
-    this.aSub = this.service.getAnalytics().subscribe((data: AnalyticsPage) => {
-      this.average = data.average;
+    const gainConfig: any = {
+      label: 'Выручка',
+      color: 'rgb(255, 99, 132)'
+    }
 
-      this.pending = false;
-    });
+    const orderConfig: any = {
+      label: 'Заказы',
+      color: 'rgb(54, 162, 235)'
+    }
+
+    this.aSub = this.service.getAnalytics().subscribe((data: AnalyticsPage) => {
+      this.average = data.average
+
+      gainConfig.labels = data.chart.map(item => item.label)
+      gainConfig.data = data.chart.map(item => item.gain)
+
+      orderConfig.labels = data.chart.map(item => item.label)
+      orderConfig.data = data.chart.map(item => item.order)
+
+      // **** Gain ****
+      // gainConfig.labels.push('08.05.2018')
+      // gainConfig.labels.push('09.05.2018')
+      // gainConfig.data.push(1500)
+      // gainConfig.data.push(700)
+      // **** /Gain ****
+
+      // **** Order ****
+      // orderConfig.labels.push('08.05.2018')
+      // orderConfig.labels.push('09.05.2018')
+      // orderConfig.data.push(8)
+      // orderConfig.data.push(2)
+      // **** /Order ****
+
+      const gainCtx = this.gainRef.nativeElement.getContext('2d')
+      const orderCtx = this.orderRef.nativeElement.getContext('2d')
+      gainCtx.canvas.height = '300px'
+      orderCtx.canvas.height = '300px'
+
+      new Chart(gainCtx, createChartConfig(gainConfig))
+      new Chart(orderCtx, createChartConfig(orderConfig))
+
+      this.pending = false
+    })
   }
 
   ngOnDestroy() {
     if (this.aSub) {
-      this.aSub.unsubscribe();
+      this.aSub.unsubscribe()
+    }
+  }
+
+}
+
+
+function createChartConfig({labels, data, label, color}) {
+  return {
+    type: 'line',
+    options: {
+      responsive: true
+    },
+    data: {
+      labels,
+      datasets: [
+        {
+          label, data,
+          borderColor: color,
+          steppedLine: false,
+          fill: false
+        }
+      ]
     }
   }
 }

@@ -20,6 +20,8 @@ import { CategoriesFormComponent } from './categories/categories-form/categories
 import { PositionFormComponent } from './categories/position-form/position-form.component';
 import { OrderCategoriesComponent } from './orders/order-categories/order-categories.component';
 import { OrderPositionsComponent } from './orders/order-positions/order-positions.component';
+import { HistoryListComponent } from './history/history-list/history-list.component';
+import { HistoryFilterComponent } from './history/history-filter/history-filter.component';
 
 
 
@@ -39,7 +41,9 @@ import { OrderPositionsComponent } from './orders/order-positions/order-position
     CategoriesFormComponent,
     PositionFormComponent,
     OrderCategoriesComponent,
-    OrderPositionsComponent
+    OrderPositionsComponent,
+    HistoryListComponent,
+    HistoryFilterComponent
   ],
   imports: [
     BrowserModule,
